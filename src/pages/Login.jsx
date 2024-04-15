@@ -1,26 +1,29 @@
 import React, { useState } from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom'; // Removed Navigate since it's not used
+import axios from 'axios';
 
 const Login = ({ onLogin }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [redirectToSignup, setRedirectToSignup] = useState(false);
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    // Simulate login logic here, for demonstration purposes
-    if (email === 'user@example.com' && password === 'password') {
-      // Call the onLogin function passed from the parent component
-      onLogin();
-    } else {
+    try {
+      const response = await axios.post('http://localhost:4000/api/login', {
+        email,
+        password
+      });
+      if (response.status === 200) {
+        // Assuming the backend sends a token upon successful login
+        // Call the onLogin function passed from the parent component
+        console.log('Login successful');
+        onLogin(); // Call the onLogin function if needed
+      }
+    } catch (error) {
       setError('Invalid email or password');
     }
   };
-
-  if (redirectToSignup) {
-    return <Navigate to="/signup" />;
-  }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
@@ -71,14 +74,7 @@ const Login = ({ onLogin }) => {
               </a>
             </div>
             <div className="text-sm">
-              <Link
-                to="#"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setRedirectToSignup(true);
-                }}
-                className="font-medium text-indigo-600 hover:text-indigo-500"
-              >
+              <Link to="/signup" className="font-medium text-indigo-600 hover:text-indigo-500">
                 Don't have an account? Sign up
               </Link>
             </div>

@@ -6,11 +6,10 @@ import Home from '../pages/Home';
 import Login from '../pages/Login';
 import SignUp from '../pages/Signup';
 
-const App = () => {
+const Rote = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(() => {
     // Check for a stored authentication token (if applicable)
-    const storedToken = localStorage.getItem('authToken'); // Adjust based on your storage mechanism
-    return storedToken ? true : false;
+
   });
 
   const handleLogin = () => {
@@ -39,6 +38,6 @@ const App = () => {
   );
 };
 
-export default App;
+export default Rote;
 
 

@@ -1,11 +1,49 @@
 import React, { useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
+import axios from 'axios'; // Import Axios
 
 const SignUp = () => {
-    const [redirectToLogin, setRedirectToLogin] = useState(false);
-    if (redirectToLogin) {
-        return <Navigate to="/login" />;
-      }
+  const [redirectToLogin, setRedirectToLogin] = useState(false);
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    cnic: '',
+    phone: '',
+    password: ''
+  });
+  const [error, setError] = useState(null);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post('http://localhost:4000/api/signup', {
+        firstname: formData.firstName,
+        lastname: formData.lastName,
+        email: formData.email,
+        cnic: formData.cnic,
+        phone: formData.phone,
+        password: formData.password
+      });// Adjust the URL as per your backend endpoint
+      console.log(response.data); // Handle success response
+      setRedirectToLogin(true); // Redirect to login page after successful signup
+    } catch (error) {
+      setError(error.response.data.message); // Handle error response
+    }
+  };
+
+  if (redirectToLogin) {
+    return <Navigate to="/login" />;
+  }
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
@@ -14,9 +52,41 @@ const SignUp = () => {
             Sign up for an account
           </h2>
         </div>
-        <form className="mt-8 space-y-6">
+        <form onSubmit={handleSubmit} className="mt-8 space-y-6">
           <input type="hidden" name="remember" value="true" />
-          <div className="rounded-md shadow-sm -space-y-px">
+          <div className="rounded-md shadow-sm space-y-6">
+            <div>
+              <label htmlFor="firstName" className="sr-only">
+                FirstName
+              </label>
+              <input
+                id="firstName"
+                name="firstName"
+                type="text"
+                autoComplete="fullName"
+                required
+                value={formData.firstName}
+                onChange={handleChange}
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                placeholder="Full Name"
+              />
+            </div>
+            <div>
+              <label htmlFor="lastName" className="sr-only">
+                LastName
+              </label>
+              <input
+                id="lastName"
+                name="lastName"
+                type="text"
+                autoComplete="fullName"
+                required
+                value={formData.lastName}
+                onChange={handleChange}
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                placeholder="Last Name"
+              />
+            </div>
             <div>
               <label htmlFor="email" className="sr-only">
                 Email address
@@ -27,8 +97,26 @@ const SignUp = () => {
                 type="email"
                 autoComplete="email"
                 required
+                value={formData.email}
+                onChange={handleChange}
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Email address"
+              />
+            </div>
+            <div>
+              <label htmlFor="number" className="sr-only">
+                CNIC
+              </label>
+              <input
+                id="number"
+                name="cnic"
+                type="string"
+                autoComplete="cnic"
+                required
+                value={formData.cnic}
+                onChange={handleChange}
+                className=" rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                placeholder="CNIC"
               />
             </div>
             <div>
@@ -41,22 +129,10 @@ const SignUp = () => {
                 type="tel"
                 autoComplete="tel"
                 required
+                value={formData.phone}
+                onChange={handleChange}
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Phone"
-              />
-            </div>
-            <div>
-              <label htmlFor="fullName" className="sr-only">
-                Full Name
-              </label>
-              <input
-                id="fullName"
-                name="fullName"
-                type="text"
-                autoComplete="fullName"
-                required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                placeholder="Full Name"
               />
             </div>
             <div>
@@ -69,12 +145,15 @@ const SignUp = () => {
                 type="password"
                 autoComplete="current-password"
                 required
+                value={formData.password}
+                onChange={handleChange}
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Password"
               />
             </div>
           </div>
-
+          {/* Error message */}
+          {error && <p className="text-red-500 text-sm">{error}</p>}
           <div>
             <button
               type="submit"
@@ -82,17 +161,16 @@ const SignUp = () => {
             >
               Sign Up
             </button>
-
             <Link
-                to="#"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setRedirectToLogin(true);
-                }}
-                className="font-medium text-indigo-600 hover:text-indigo-500"
-              >
-                Already have an account? Log in
-              </Link>
+              to="#"
+              onClick={(e) => {
+                e.preventDefault();
+                setRedirectToLogin(true);
+              }}
+              className="font-medium text-indigo-600 hover:text-indigo-500"
+            >
+              Already have an account? Log in
+            </Link>
           </div>
         </form>
       </div>
