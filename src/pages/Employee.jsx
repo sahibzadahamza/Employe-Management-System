@@ -28,13 +28,8 @@ const Employee = () => {
     e.preventDefault();
     setIsSubmitting(true);
     const token = localStorage.getItem('token');
-    console.log(token);
-    console.log(formData);
     try {
       const response = await axios.post('http://localhost:4000/api/employee', {
-        headers: {
-            Authorization: `Bearer ${token}`
-          }},{
           firstname: formData.firstName,
           lastname: formData.lastName,
           email: formData.email,
@@ -42,7 +37,10 @@ const Employee = () => {
           job: formData.job,
           dateOfJoining: formData.dateOfJoining,
           image: formData.image
-      });// Adjust the URL as per your backend endpoint
+      },{
+        headers: {
+            Authorization: `Bearer ${token}`
+          }});// Adjust the URL as per your backend endpoint
       console.log(response.data); // Handle success response
       setRedirectTomEployeeDetail(true); // Redirect to login page after successful signup
     } catch (error) {
