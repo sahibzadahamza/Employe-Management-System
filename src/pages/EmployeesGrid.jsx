@@ -24,6 +24,7 @@ const EmployeeGrid = () => {
 
   return (
     <div className='p-20'>
+    <a href='/joblisting'>JobListing</a>
     <h1 className='text-center text-3xl font-sans font-semibold mb-10'>Employe List</h1>
     <div className="grid grid-cols-3 gap-4">
       {employees.map(employee => (

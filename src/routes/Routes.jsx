@@ -6,6 +6,7 @@ import Home from '../pages/Home';
 import Login from '../pages/Login';
 import SignUp from '../pages/Signup';
 import EmployeeGrid from '../pages/EmployeesGrid';
+import JobListing from '../pages/JobListing';
 
 const Routers = () => {
 
@@ -15,6 +16,7 @@ const Routers = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} /> 
         <Route path="/employee" element={<EmployeeGrid />} /> 
+        <Route path="/joblisting" element={<JobListing />} /> 
              
       </Routes>    
     </Router>
