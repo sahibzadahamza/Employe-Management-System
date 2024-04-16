@@ -12,6 +12,7 @@ const SignUp = () => {
     phone: '',
     password: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false); 
   const [error, setError] = useState(null);
 
   const handleChange = (e) => {
@@ -24,6 +25,7 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
     try {
       const response = await axios.post('http://localhost:4000/api/signup', {
         firstname: formData.firstName,
@@ -37,6 +39,8 @@ const SignUp = () => {
       setRedirectToLogin(true); // Redirect to login page after successful signup
     } catch (error) {
       setError(error.response.data.message); // Handle error response
+    }finally {
+      setIsSubmitting(false); // Set submitting status back to false
     }
   };
 
@@ -56,7 +60,7 @@ const SignUp = () => {
           <input type="hidden" name="remember" value="true" />
           <div className="rounded-md shadow-sm space-y-6">
             <div>
-              <label htmlFor="firstName" className="sr-only">
+              <label htmlFor="firstName" className="">
                 FirstName
               </label>
               <input
@@ -72,7 +76,7 @@ const SignUp = () => {
               />
             </div>
             <div>
-              <label htmlFor="lastName" className="sr-only">
+              <label htmlFor="lastName" className="">
                 LastName
               </label>
               <input
@@ -88,7 +92,7 @@ const SignUp = () => {
               />
             </div>
             <div>
-              <label htmlFor="email" className="sr-only">
+              <label htmlFor="email" className="">
                 Email address
               </label>
               <input
@@ -104,7 +108,7 @@ const SignUp = () => {
               />
             </div>
             <div>
-              <label htmlFor="number" className="sr-only">
+              <label htmlFor="number" className="">
                 CNIC
               </label>
               <input
@@ -120,7 +124,7 @@ const SignUp = () => {
               />
             </div>
             <div>
-              <label htmlFor="phone" className="sr-only">
+              <label htmlFor="phone" className="">
                 Phone
               </label>
               <input
@@ -136,7 +140,7 @@ const SignUp = () => {
               />
             </div>
             <div>
-              <label htmlFor="password" className="sr-only">
+              <label htmlFor="password" className="">
                 Password
               </label>
               <input
@@ -156,12 +160,14 @@ const SignUp = () => {
           {error && <p className="text-red-500 text-sm">{error}</p>}
           <div>
             <button
+            disabled={isSubmitting}
               type="submit"
               className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
               Sign Up
             </button>
-            <Link
+            <p>
+            Already have an account?   <Link
               to="#"
               onClick={(e) => {
                 e.preventDefault();
@@ -169,8 +175,9 @@ const SignUp = () => {
               }}
               className="font-medium text-indigo-600 hover:text-indigo-500"
             >
-              Already have an account? Log in
+               Log in
             </Link>
+            </p>
           </div>
         </form>
       </div>
