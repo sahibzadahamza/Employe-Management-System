@@ -28,8 +28,6 @@ const Employee = () => {
     e.preventDefault();
     setIsSubmitting(true);
     const token = localStorage.getItem('token');
-    console.log(token);
-    console.log(formData);
     try {
       const response = await axios.post('http://localhost:4000/api/employee', {
         firstname: formData.firstName,

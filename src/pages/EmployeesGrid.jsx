@@ -29,26 +29,21 @@ const EmployeeGrid = () => {
     // Implement your edit logic (e.g., making API call to edit the employee)
   };
 
-  const handleDelete = (id) => {
-    // Implement your delete logic (e.g., making API call to delete the employee)
-    useEffect(() => {
-      const deleteEmployee = async () => {
+  const handleDelete = async (id) => {
+    // Retrieve the authentication token from localStorage
         const token = localStorage.getItem('token');
+        console.log(token);
         try {
-          const response = await axios.delete(`http://localhost:4000/api/employees/:${id}`, {
+          const response = await axios.delete(`http://localhost:4000/api/employee/${id}`, {
             headers: {
               Authorization: `Bearer ${token}`
             }
           });
-          console.log(`Deleting employee with ID: ${id}`);
+          console.log(`Employee with ID ${id} deleted successfully.`);
           // setEmployees(response.data);
         } catch (error) {
-          console.error(`Error deleting employee with ID: ${id}`, error);
+          console.error(`Error deleting employee with ID ${id}:`, error);
         }
-      };
-  
-      deleteEmployee();
-    }, []);
   };
 
   return (
@@ -63,6 +58,7 @@ const EmployeeGrid = () => {
               <img className="h-48 w-full object-cover" src={employee.image} alt={`${employee.firstname} ${employee.lastname}`} />
               <div className="px-4 py-4">
                 <h2 className="text-xl font-semibold text-gray-800">Employee Name : {`${employee.firstname} ${employee.lastname}`}</h2>
+                <p className="text-sm text-gray-600">Employee ID : {employee._id}</p>
                 <p className="text-sm text-gray-600">Employee Job : {employee.job}</p>
                 <p className="text-sm text-gray-600">Employee Email : {employee.email}</p>
                 <p className="text-sm text-gray-600">Employee Phone : {employee.phone}</p>
