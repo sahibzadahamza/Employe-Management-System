@@ -21,7 +21,7 @@ const Login = () => {
         const token = response.data.token;
         localStorage.setItem('token', token);
         console.log('Login successful');
-        navigate('/employee');
+        navigate('/employeesDetail');
 
 
       }
