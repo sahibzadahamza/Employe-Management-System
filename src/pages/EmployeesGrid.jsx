@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import {Link} from 'react-router-dom';
+import {Link, Navigate} from 'react-router-dom';
 import axios from 'axios';
 
 const EmployeeGrid = () => {
   const [employees, setEmployees] = useState([]);
+  const [redirectToUpdateEmployee, setRedirectToUpdateEmployee] = useState(false);
 
   useEffect(() => {
     const fetchEmployees = async () => {
@@ -27,28 +28,32 @@ const EmployeeGrid = () => {
 
     // Handle edit functionality here
     console.log(`Updating employee with ID: ${id}`);
-    
+    setRedirectToUpdateEmployee(id);
     // Navigate to the UpdateEmployee page while passing the employee ID
   };
 
+  if (redirectToUpdateEmployee) {
+    return <Navigate to={`/updateEmployee/${redirectToUpdateEmployee}`} />;
+  }
+
   const handleDelete = async (id) => {
     // Retrieve the authentication token from localStorage 
-        try {
-              const token = localStorage.getItem('token');
-              if (!token) {
-                console.error('No token found!');
-                return;
-              }
-              const response = await axios.delete(`http://localhost:4000/api/employee/${id}`, {
-                headers: {
-                  Authorization: `Bearer ${token}`
-                }
-              });
-              console.log(`Employee with ID ${id} deleted successfully.`);
-              window.location.reload();
-            } catch (error) {
-              console.error(`Error deleting employee with ID ${id}:`, error);
-            }
+    try {
+        const token = localStorage.getItem('token');
+        if (!token) {
+          console.error('No token found!');
+          return;
+        }
+        const response = await axios.delete(`http://localhost:4000/api/employee/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+        console.log(`Employee with ID ${id} deleted successfully.`);
+        window.location.reload();
+      } catch (error) {
+        console.error(`Error deleting employee with ID ${id}:`, error);
+      }
   };
 
   return (

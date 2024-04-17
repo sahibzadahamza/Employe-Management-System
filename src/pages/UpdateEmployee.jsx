@@ -1,9 +1,30 @@
-import React, { useState } from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, Navigate, useParams } from 'react-router-dom';
 import axios from 'axios'; // Import Axios
 
 const UpdateEmployee = () => {
-  const [redirectToEmployeeDetail, setRedirectTomEployeeDetail] = useState(false);
+  let { id } = useParams();
+  const [employee, setEmployee] = useState(null);
+
+  useEffect(() => {
+    const fetchEmployee = async () => {
+      const token = localStorage.getItem('token');
+      try {
+        const response = await axios.get(`http://localhost:4000/api/employees/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+        setEmployee(response.data);
+      } catch (error) {
+        console.error('Error fetching employee:', error);
+      }
+    };
+
+    fetchEmployee();
+  }, [id]); // Run once on component mount
+
+  const [redirectToEmployeeDetail, setRedirectToEmployeeDetail] = useState(false);
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -15,6 +36,20 @@ const UpdateEmployee = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false); 
   const [error, setError] = useState(null);
+
+  useEffect(() => {
+    if (employee) {
+      setFormData({
+        firstName: employee.firstname || '', // Use default value if employee.firstName is null or undefined
+        lastName: employee.lastname || '',
+        email: employee.email || '',
+        phone: employee.phone || '',
+        job: employee.job || '',
+        dateOfJoining: employee.dateOfJoining || '',
+        image: employee.image || ''
+      });
+    }
+  }, [employee]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -29,7 +64,7 @@ const UpdateEmployee = () => {
     setIsSubmitting(true);
     const token = localStorage.getItem('token');
     try {
-      const response = await axios.post('http://localhost:4000/api/employee', {
+      const response = await axios.put(`http://localhost:4000/api/employees/${id}`, {
         firstname: formData.firstName,
         lastname: formData.lastName,
         email: formData.email,
@@ -43,7 +78,7 @@ const UpdateEmployee = () => {
         }
       });// Adjust the URL as per your backend endpoint
       console.log(response.data); // Handle success response
-      setRedirectTomEployeeDetail(true); // Redirect to login page after successful signup
+      setRedirectToEmployeeDetail(true); // Redirect to login page after successful signup
     } catch (error) {
       setError(error.response.data.message); // Handle error response
     }finally {
@@ -63,6 +98,7 @@ const UpdateEmployee = () => {
             Update Existing Employee
           </h2>
         </div>
+        {employee ? ( // Check if employee data is available
         <form onSubmit={handleSubmit} className="mt-8 space-y-6">
           <input type="hidden" name="remember" value="true" />
           <div className="rounded-md shadow-sm space-y-6">
@@ -199,6 +235,9 @@ const UpdateEmployee = () => {
             </p>
           </div>
         </form>
+        ) : (
+          <p>Loading...</p>
+        )}
       </div>
     </div>
   );
