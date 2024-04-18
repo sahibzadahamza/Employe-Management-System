@@ -49,8 +49,10 @@ const EmployeeGrid = () => {
   return (
     <div className='p-20'>
       <div>   
-        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900" >Employee Details</h2>
-        <Link to="/addEmployee" className="font-medium text-indigo-600 hover:text-indigo-500">Create New Employee</Link> 
+        <h2 className=" flex mt-6 space-x-6 text-center text-3xl font-extrabold text-gray-900" >Employee Details</h2>
+        <Link to="/addEmployee" className="font-medium text-indigo-600 hover:text-indigo-500 mr-20">Create New Employee</Link> 
+        <Link to="/joblisting" className="font-medium text-indigo-600 hover:text-indigo-500">jobs</Link> 
+       
       </div> 
         <div className="grid grid-cols-3 gap-4">
           {employees.map(employee => (
