@@ -3,6 +3,47 @@ import axios from 'axios';
 
 const JobListing = () => {
     const [jobs, setJobs] = useState([]);
+    const [redirectToUpdateJob, setRedirectToUpdateJob] = useState(false);
+
+    useEffect(() => {
+      const fetchJobs = async () => {
+        const token = localStorage.getItem('token');
+        try {
+            const response = await axios.get('http://localhost:4000/api/jobs', {
+              headers: {
+                Authorization: `Bearer ${token}`
+              }
+            });
+            setJobs(response.data);
+        } catch (error) {
+          console.error('Error fetching employees:', error);
+        }
+      };
+  
+      fetchJobs();
+    }, []);
+
+    const handleUpdate = (id) => {
+
+      // Handle edit functionality here
+      console.log(`Updating employee with ID: ${id}`);
+      setRedirectToUpdateJob(id);
+      // Navigate to the UpdateEmployee page while passing the employee ID
+    };
+  
+    if (redirectToUpdateJob) {
+      return <Navigate to={`/updateEmployee/${redirectToUpdateJob}`} />;
+    }
+
+    return (
+        <div className='p-20'>
+          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900" >Job Listings</h2>
+          <a href='/createJob' className="text-center font-medium text-indigo-600 hover:text-indigo-500">Create New Job</a>
+           
+            <div className='grid grid-cols-3 gap-4'>
+                {jobs.map(job => (
+                    <div key={job._id} className='border p-4'>
+                        <h2 className="text-xl font-semibold text-gray-800">Job Title : {`${job.title}`}</h2
 
     useEffect(() => {
         const fetchJobs = async () => {
