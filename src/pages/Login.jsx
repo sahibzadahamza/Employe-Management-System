@@ -20,6 +20,9 @@ const Login = () => {
       if (response.status === 200) {
         const token = response.data.token;
         localStorage.setItem('token', token);
+        const email = response.data.email;
+        
+
         console.log('Login successful');
         navigate('/employeesDetail');
 

@@ -7,7 +7,6 @@ import Login from '../pages/Login';
 import SignUp from '../pages/Signup';
 import EmployeeGrid from '../pages/EmployeesGrid';
 import JobListing from '../pages/JobListing';
-import Employee from '../pages/Employee';
 import CreateJob from '../pages/CreateJobs';
 import AddEmployee from '../pages/AddEmployee';
 import UpdateEmployee from '../pages/UpdateEmployee';
@@ -21,7 +20,7 @@ const Routers = () => {
         <Route path="/signup" element={<SignUp />} /> 
         <Route path="/employee" element={<EmployeeGrid />} /> 
         <Route path="/joblisting" element={<JobListing />} /> 
-        <Route path="/addJob" element={<CreateJob />} /> 
+        <Route path="/createJob" element={<CreateJob />} /> 
         <Route path="/employeesDetail" element={<EmployeeGrid />} /> 
         <Route path="/addEmployee" element={<AddEmployee />} />
         <Route path="/updateEmployee/:id" element={<UpdateEmployee />} /> 
