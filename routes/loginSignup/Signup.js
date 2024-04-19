@@ -24,7 +24,7 @@ router.post("/signup", async (req, res) => {
       email,
       phone,
       cnic,
-      role: role || "employee",
+      role: role || "employer",
       password,
     });
 

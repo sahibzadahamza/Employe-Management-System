@@ -38,6 +38,7 @@ router.post("/addJobs", auth, Job);
 router.delete("/jobs/:id", auth, deleteJob);
 router.put("/jobs/:id", auth, updateJob);
 router.get("/jobs", showJob);
+router.get("/jobs/:id", showJob);
 router.post('/confirmOtp', confirmPassword);
 
 // Route for updating user password
