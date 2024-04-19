@@ -9,7 +9,7 @@ const CreateJob = () => {
         description: '',
         requirements: '',
         salary: 0,
-        jobType: 'Remote'
+        jobType: ''
     });
     const [isSubmitting, setIsSubmitting] = useState(false); 
     const [error, setError] = useState(null);
@@ -27,7 +27,7 @@ const CreateJob = () => {
         setIsSubmitting(true);
         const token = localStorage.getItem('token');
         try {
-            const response = await axios.post('http://localhost:4000/api/addJobs', {
+            const response = await axios.post('http://localhost:4000/api/jobs', {
                 title: formData.title,
                 description:formData.description,
                 requirements: formData.requirements,
@@ -48,7 +48,7 @@ const CreateJob = () => {
       };
     
       if (redirectToJobListing) {
-        return <Navigate to="/joblisting" />;
+        return <Navigate to="/employeesDetail" />;
       }
 
     return (
@@ -85,7 +85,7 @@ const CreateJob = () => {
                         <label htmlFor="jobType">Job Type:</label>
                         <select id="jobType" name="jobType" value={formData.jobType} onChange={handleChange} required
                          className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"> 
-                        <option name="remote">Remote</option>
+                        <option name="remote"> Remote</option>
                         <option name="onsite">Onsite</option>
                         <option name="hybrid">Hybrid</option>
                         </select>
@@ -101,7 +101,7 @@ const CreateJob = () => {
                         </button>
                         <p>
                         Do you want to return Job Listing page? please click on...  <Link
-                        to="/joblisting"
+                        to="/employeesDetail"
                         className="font-medium text-indigo-600 hover:text-indigo-500"
                         >
                         Back to Job Listing

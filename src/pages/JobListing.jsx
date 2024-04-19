@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import {Navigate} from 'react-router-dom';
 import axios from 'axios';
 
 const JobListing = () => {
@@ -26,14 +27,34 @@ const JobListing = () => {
     const handleUpdate = (id) => {
 
       // Handle edit functionality here
-      console.log(`Updating employee with ID: ${id}`);
+      console.log(`Updating Job with ID: ${id}`);
       setRedirectToUpdateJob(id);
       // Navigate to the UpdateEmployee page while passing the employee ID
     };
   
     if (redirectToUpdateJob) {
-      return <Navigate to={`/updateEmployee/${redirectToUpdateJob}`} />;
+      return <Navigate to={`/updateJob/${redirectToUpdateJob}`} />;
     }
+
+    const handleDelete = async (id) => {
+      // Retrieve the authentication token from localStorage 
+      try {
+          const token = localStorage.getItem('token');
+          if (!token) {
+            console.error('No token found!');
+            return;
+          }
+          const response = await axios.delete(`http://localhost:4000/api/jobs/${id}`, {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          });
+          console.log(`Job with ID ${id} deleted successfully.`);
+          window.location.reload();
+        } catch (error) {
+          console.error(`Error deleting Job with ID ${id}:`, error);
+        }
+    };
 
     return (
         <div className='p-20'>
@@ -60,8 +81,8 @@ const JobListing = () => {
                         <p>Updated At: {new Date(job.updatedAt).toLocaleDateString()}</p>
                         </div>
 
-                        <a href='/' className='bg-blue-300 p-2 mt-5 mr-10'>Delete</a>
-                        <a className='bg-blue-300 p-2 mt-5'>update</a>
+                        <a className='bg-blue-300 p-2 mt-5 mr-10' onClick={() => handleDelete(job._id)}>Delete</a>
+                        <a className='bg-blue-300 p-2 mt-5' onClick={() => handleUpdate(job._id)}>update</a>
                     </div>
                 ))}
             </div>
