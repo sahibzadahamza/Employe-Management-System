@@ -43,7 +43,36 @@ const JobListing = () => {
             <div className='grid grid-cols-3 gap-4'>
                 {jobs.map(job => (
                     <div key={job._id} className='border p-4'>
-                        <h2 className="text-xl font-semibold text-gray-800">Job Title : {`${job.title}`}</h2>
+                        <h2 className="text-xl font-semibold text-gray-800">Job Title : {`${job.title}`}</h2
+
+    useEffect(() => {
+        const fetchJobs = async () => {
+            try {
+      
+                const response = await axios.get('http://localhost:4000/api/jobs', 
+                  );
+                setJobs(response.data);
+            } catch (error) {
+                console.error('Error fetching jobs:', error);
+            }
+        };
+
+        fetchJobs();
+    }, []); // Run once on component mount
+
+    return (
+        <div className='p-20'>
+           <div className='flex justify-between px-32'>
+           <h2>Job Listings</h2>
+            <a href='/addJob'>CreateJobs</a>
+           </div>
+           
+           
+
+            <div className='grid grid-cols-3 gap-4'>
+                {jobs.map(job => (
+                    <div key={job._id} className='border p-4'>
+                        <h3>{job.title}</h3>
                         <p>Description: {job.description}</p>
                         <p>Job Type: {job.jobType}</p>
                         <p>Salary: ${job.salary}</p>
