@@ -7,7 +7,7 @@ import Login from '../pages/Login';
 import SignUp from '../pages/Signup';
 import EmployeeGrid from '../pages/EmployeesGrid';
 import JobListing from '../pages/JobListing';
-import CreateJob from '../pages/CreateJobs';
+import CreateJob from '../pages/AddJObs';
 import AddEmployee from '../pages/AddEmployee';
 import UpdateEmployee from '../pages/UpdateEmployee';
 
