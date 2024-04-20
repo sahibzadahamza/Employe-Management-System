@@ -14,6 +14,14 @@ const auth = async (req, res, next) => {
 
     if (token && isCustomAuth) {
       decodedData = jwt.verify(token, process.env.SECRET_KEY);
+      req.userId = decodedData?.id; // Assuming user ID is included in the JWT payload
+    } else {
+      decodedData = jwt.decode(token);
+      req.userId = decodedData?.sub; // Assuming user ID is included as 'sub' in the JWT payload
+    }
+
+    if (token && isCustomAuth) {
+      decodedData = jwt.verify(token, process.env.SECRET_KEY);
       req.userEmail = decodedData?.email;
     } else {
       decodedData = jwt.decode(token);

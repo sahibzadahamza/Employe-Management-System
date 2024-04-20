@@ -15,9 +15,8 @@ router.get("/jobs", async (req, res) => {
 });
 
 // Get a specific job by ID
-router.get("/:id", async (req, res) => {
+router.get("/jobs/:id", async (req, res) => {
   const { id } = req.params;
-
   try {
     const job = await Job.findById(id);
     if (!job) {
