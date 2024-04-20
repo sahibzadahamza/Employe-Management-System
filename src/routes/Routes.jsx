@@ -10,6 +10,9 @@ import JobListing from '../pages/JobListing';
 import CreateJob from '../pages/AddJObs';
 import AddEmployee from '../pages/AddEmployee';
 import UpdateEmployee from '../pages/UpdateEmployee';
+import ForgetPassword from '../pages/ForgetPassword'
+import SendPassword from '../pages/SendPassword'
+import UpdatePassword from '../pages/UpdatePassword';
 
 const Routers = () => {
 
@@ -24,7 +27,9 @@ const Routers = () => {
         <Route path="/employeesDetail" element={<EmployeeGrid />} /> 
         <Route path="/addEmployee" element={<AddEmployee />} />
         <Route path="/updateEmployee/:id" element={<UpdateEmployee />} /> 
-             
+         <Route path='/forgetPassword' element= {<ForgetPassword/>}/>    
+         <Route path='/updatePassword' element= {<UpdatePassword/>}/>    
+         <Route path='/sendPassword' element= {<SendPassword/>}/>    
       </Routes>    
     </Router>
   );

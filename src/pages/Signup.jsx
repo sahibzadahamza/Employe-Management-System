@@ -8,6 +8,7 @@ const SignUp = () => {
     firstName: '',
     lastName: '',
     email: '',
+    role: 'employer',
     cnic: '',
     phone: '',
     password: ''
@@ -31,6 +32,7 @@ const SignUp = () => {
         firstname: formData.firstName,
         lastname: formData.lastName,
         email: formData.email,
+        role: formData.role,
         cnic: formData.cnic,
         phone: formData.phone,
         password: formData.password

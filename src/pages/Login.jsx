@@ -79,7 +79,7 @@ const Login = () => {
           {error && <p className="text-red-500">{error}</p>}
           <div className="">
             <div className="text-sm">
-              <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
+              <a href="/sendPassword" className="font-medium text-indigo-600 hover:text-indigo-500">
                 Forgot your password?
               </a>
             </div>
