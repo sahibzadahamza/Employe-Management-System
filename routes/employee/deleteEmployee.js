@@ -5,7 +5,7 @@ import auth from "../../middlewares/auth.js"; // Import your auth middleware
 const router = express.Router();
 
 // This route expects the ID to be passed in the URL
-router.delete("/employee/:id", auth, async (req, res) => {
+router.delete("/employees/:id", auth, async (req, res) => {
   try {
     const employee = await Employees.findByIdAndDelete({ _id: req.params.id });
     if (!employee) {

@@ -3,7 +3,7 @@ import { Employees } from "../../models/Employees.js";
 
 const router = express.Router();
 
-router.get("/:id", async (req, res) => {
+router.get("/employees/:id", async (req, res) => {
   console.log(req.params.id);
   try {
     const employee = await Employees.findById(req.params.id);
