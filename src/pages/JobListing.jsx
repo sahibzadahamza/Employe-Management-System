@@ -80,7 +80,9 @@ const JobListing = () => {
                         <p>Created At: {new Date(job.createdAt).toLocaleDateString()}</p>
                         <p>Updated At: {new Date(job.updatedAt).toLocaleDateString()}</p>
                         </div>
-
+                            <div>
+                              
+                            </div>
                         <a className='bg-blue-300 p-2 mt-5 mr-10' onClick={() => handleDelete(job._id)}>Delete</a>
                         <a className='bg-blue-300 p-2 mt-5' onClick={() => handleUpdate(job._id)}>update</a>
                     </div>

@@ -10,7 +10,7 @@ const SignUp = () => {
     email: '',
     role: 'employer',
     cnic: '',
-    role: '',
+    role: 'employee',
     phone: '',
     password: ''
   });
@@ -147,8 +147,8 @@ const SignUp = () => {
                 <label htmlFor="role">Role:</label>
                 <select id="role" name="role" value={formData.role} onChange={handleChange} required
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"> 
-                <option name="employee">Employee</option>
-                <option name="employer">Employer</option>
+                <option name="employee" value='employee'>employee</option>
+                <option name="employer" value='employer'>employer</option>
                 </select>
             </div>
             <div>
