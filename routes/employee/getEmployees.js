@@ -6,7 +6,6 @@ const router = express.Router();
 router.get("/employees", async (req, res) => {
   try {
     const response = await Employees.find();
-    console.log(response);
     res.json(response);
   } catch (error) {
     res.status(500).send(`Error adding employee: ${error.message}`);
