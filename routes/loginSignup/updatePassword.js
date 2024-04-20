@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs";
 import User from "../../models/User.js";
 const router = express.Router();
 
-router.post('/confirmotp',async (req, resp) => {
+router.post('/resetPassword', async (req, resp) => {
     try {
         const { email, newPassword } = req.body;
         if (!email || !newPassword) {
@@ -13,15 +13,16 @@ router.post('/confirmotp',async (req, resp) => {
             });
         }
         const user = await User.findOne({ email });
+        console.log('hello', user)
         if (!user) {
             return resp.status(404).send({
                 success: false,
                 message: 'Email does not exist'
             });
         }
-        const salt = await bcrypt.genSalt(10);
-        const newHashPassword = await bcrypt.hash(newPassword, salt);
-        user.password = newHashPassword;
+        // const salt = await bcrypt.genSalt(10);
+        // const newHashPassword = await bcrypt.hash(newPassword, salt);
+        user.password = newPassword;
         await user.save();
         resp.status(200).send({
             success: true,

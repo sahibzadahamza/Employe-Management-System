@@ -14,7 +14,7 @@ import { deleteJob } from "./jobs/deleteJob.js";
 import { updateJob } from "./jobs/updateJob.js";
 import { showJob } from "./jobs/showJob.js";
 import auth from "../middlewares/auth.js";
-import { confirmPassword } from "./loginSignup/ConfirmPassword.js";
+import { ConfirmPassword } from "./loginSignup/ConfirmPassword.js";
 import { sendPassword } from "./loginSignup/sendPasswrord.js";
 import { updatePassword } from "./loginSignup/updatePassword.js";
 
@@ -38,7 +38,7 @@ router.post("/addJobs", auth, Job);
 router.delete("/jobs/:id", auth, deleteJob);
 router.put("/jobs/:id", auth, updateJob);
 router.get("/jobs", showJob);
-router.post('/confirmOtp', confirmPassword);
+router.post('/confirmOtp', ConfirmPassword);
 
 // Route for updating user password
 router.post('/resetPassword', updatePassword );

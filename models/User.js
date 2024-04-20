@@ -36,6 +36,9 @@ const UserSchema = new Schema(
       type: String,
       required: true,
     },
+    resetPasswordOTP :{
+      type:Number,
+  },
   },
   { timestamps: true }
 );

@@ -2,10 +2,14 @@ import express from "express";
 import bcrypt from "bcryptjs";
 // import jwt from "jsonwebtoken";
 import User from "../../models/User.js";
+import dotenv from "dotenv";
+import transporter from './config/emailConfig.js'
+dotenv.config();
+
 
 const router = express.Router();
 
-router.post('/confirmotp',async (req, resp) => {
+router.post('/sendOtp',async (req, resp) => {
     try {
         const { email } = req.body;
         if (!email) {
@@ -28,7 +32,7 @@ router.post('/confirmotp',async (req, resp) => {
             from: process.env.EMAIL_FROM,
             to: user.email,
             subject: "Reservation - Password Reset OTP",
-            text: `Hi ${user.fullName}, Your OTP for password reset is: ${otp}`
+            text: `Hi ${user.firstname}, Your OTP for password reset is: ${otp}`
         });
         resp.status(200).send({
             success: true,
