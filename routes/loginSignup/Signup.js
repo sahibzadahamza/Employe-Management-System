@@ -17,8 +17,8 @@ router.post("/signup", async (req, res) => {
       return res.status(400).json({ message: "Email or CNIC already exists" });
     }
 
-    var salt = bcrypt.genSaltSync(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
+    // var salt = bcrypt.genSaltSync(10);
+    // const hashedPassword = await bcrypt.hash(password, salt);
     // Create a new user
     const user = new User({
       firstname,
@@ -27,7 +27,7 @@ router.post("/signup", async (req, res) => {
       phone,
       cnic,
       role: role || "employee",
-      password:hashedPassword,
+      password,
     });
 
     await user.save();

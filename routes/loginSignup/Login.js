@@ -28,7 +28,7 @@ router.post("/login", async (req, res) => {
       process.env.SECRET_KEY,
       { expiresIn: "7d" }
     );
-    user.password = undefined;
+   
     res.status(200).json({ result: user, token });
   } catch (error) {
     console.error(error);
