@@ -32,9 +32,8 @@ const navigate = useNavigate();
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center bg-purple-900 text-white">
-      <button className="absolute top-0 left-0 p-4" onClick={() => window.history.back()}>Back</button>
-      <img src="../../assets/pngImage.png" alt="logo" className="w-64 h-64 mb-8" />
+    <div className="min-h-screen flex flex-col justify-center items-center px-20">
+      <button className="pr-[12.5rem] my-6 underline text-slate-600" onClick={() => window.history.back()}>Back</button>
 
       <div className="mb-8">
         <h1 className="text-3xl font-bold">Forget Password</h1>
@@ -47,17 +46,18 @@ const navigate = useNavigate();
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full py-2 px-4 bg-transparent border-b border-white text-white placeholder-gray-300 focus:outline-none"
+          className="appearance-none rounded-none relative block w-full px-5  py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
         />
       </div>
 
-      <button className="w-full py-3 bg-gradient-to-r from-pink-500 to-yellow-400 text-white font-bold text-lg rounded-lg shadow-md focus:outline-none" onClick={handlePasswordReset}>
+      <button className="group relative flex justify-center py-2 px-20 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+       onClick={handlePasswordReset}>
         Submit
       </button>
 
-      <div className="mt-8">
-        <p>Remember the password?</p>
-        <a href="/login" className="text-purple-300 underline">Sign In</a>
+      <div className="mt-8 break-words">
+        <p>Remember the password? <a href="/login" className="text-slate-600 underline">Sign In</a></p>
+        
       </div>
     </div>
   );

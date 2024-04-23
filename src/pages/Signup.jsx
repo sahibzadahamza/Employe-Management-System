@@ -10,7 +10,6 @@ const SignUp = () => {
     email: '',
     role: 'employer',
     cnic: '',
-    role: 'employee',
     phone: '',
     password: ''
   });
@@ -33,13 +32,12 @@ const SignUp = () => {
         firstname: formData.firstName,
         lastname: formData.lastName,
         email: formData.email,
-        role: formData.role,
         cnic: formData.cnic,
         role: formData.role,
         phone: formData.phone,
         password: formData.password
       });// Adjust the URL as per your backend endpoint
-      console.log(response.data); // Handle success response
+      console.log(response); // Handle success response
       setRedirectToLogin(true); // Redirect to login page after successful signup
     } catch (error) {
       setError(error.response.data.message); // Handle error response

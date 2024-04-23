@@ -76,9 +76,9 @@ function UpdatePassword() {
   };
 
   return (
-    <div className="min-h-screen bg-purple-900 text-white flex flex-col justify-center items-center p-8">
-      <button className="absolute top-0 left-0 p-4" onClick={() => navigation.goBack()}>Back</button>
-      <img src="../../assets/pngImage.png" alt="logo" className="w-64 h-64 mb-8" />
+    <div className=" text-center p-8">
+      <button className="" onClick={() => navigation.goBack()}>Back</button>
+   
 
       <div className="mb-8 text-center">
         <h1 className="text-3xl font-bold">Change Password</h1>
@@ -92,10 +92,10 @@ function UpdatePassword() {
             placeholder="New Password"
             value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
-            className="w-full py-2 px-4 bg-transparent border-b border-white text-white placeholder-gray-300 focus:outline-none"
+            className="appearance-none rounded-none px-5  py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
           />
-          <button onClick={togglePasswordVisibility} className="absolute top-1/2 transform -translate-y-1/2 right-0 mr-4">
-            <img src={showPassword ? '../../assets/opened1.png' : '../../assets/closed1.png'} alt="toggle visibility" className="h-6 w-6" />
+          <button onClick={togglePasswordVisibility} className="ml-2">
+            show
           </button>
         </div>
       </div>
@@ -107,15 +107,16 @@ function UpdatePassword() {
             placeholder="Confirm New Password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
-            className="w-full py-2 px-4 bg-transparent border-b border-white text-white placeholder-gray-300 focus:outline-none"
+            className="appearance-none rounded-none px-5  py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
           />
-          <button onClick={togglePasswordVisibility2} className="absolute top-1/2 transform -translate-y-1/2 right-0 mr-4">
-            <img src={showPassword2 ? '../../assets/opened1.png' : '../../assets/closed1.png'} alt="toggle visibility" className="h-6 w-6" />
+          <button onClick={togglePasswordVisibility2} className="ml-2">
+            show
           </button>
         </div>
       </div>
 
-      <button className="w-full py-3 bg-gradient-to-r from-pink-500 to-yellow-400 text-white font-bold text-lg rounded-lg shadow-md focus:outline-none mb-8" onClick={handleChangePassword} disabled={loading}>
+      <button className="group relative py-2 px-20 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+      onClick={handleChangePassword}>
         Submit
       </button>
     </div>
