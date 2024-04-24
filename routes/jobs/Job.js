@@ -11,7 +11,7 @@ router.post("/addJobs", auth, async (req, res) => {
     // Check if the user is an employer
     const user = await User.findOne({ email: req.userEmail });
     console.log(user);
-    if (!user || user.role !== "employee") {
+    if (!user || user.role !== "employer") {
       return res.status(403).json({ message: "Only employers can post jobs" });
     }
 
