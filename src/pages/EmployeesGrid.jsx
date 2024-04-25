@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {Link, Navigate} from 'react-router-dom';
 import axios from 'axios';
+import AdminHeader from './AdminHeader';
 
 const EmployeeGrid = () => {
   const [employees, setEmployees] = useState([]);
@@ -57,10 +58,10 @@ const EmployeeGrid = () => {
   };
 
   return (
-    <div className='p-20 bg-gray-100'>
-        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900" >Employee Details</h2>
-        <Link to="/addEmployee" className="font-medium text-indigo-600 hover:text-indigo-500 mr-20">Add New Employee</Link>
-        <Link to="/joblisting" className="font-medium text-indigo-600 hover:text-indigo-500">View Job Listing Page</Link>  
+    <>
+<AdminHeader/>
+    <div className='px-20 py-10 bg-gray-100'>
+        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900 mb-6" >Employee Details</h2> 
         <div className="grid grid-cols-3 gap-4">
           {employees.map(employee => (
             <div key={employee._id} className="bg-white overflow-hidden shadow rounded-lg p-4">
@@ -89,6 +90,7 @@ const EmployeeGrid = () => {
           ))}
         </div>
     </div>
+    </>
   );
 };
 

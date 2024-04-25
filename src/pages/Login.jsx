@@ -20,12 +20,18 @@ const Login = () => {
       if (response.status === 200) {
         const token = response.data.token;
         localStorage.setItem('token', token);
-        const email = response.data.email;
+      const data =response.data.result.role
+     localStorage.setItem('data',data)
+      console.log("login")
+     if(response.data.result.role === "employer")
+     {
+      navigate('/joblisting');
+     }
+     else{
+      navigate('/user')
+     }
         
-
-        console.log('Login successful');
-        navigate('/employeesDetail');
-
+     window.location.reload();
 
       }
     } catch (error) {
@@ -36,7 +42,7 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign in to your account</h2>

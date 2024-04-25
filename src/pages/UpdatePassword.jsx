@@ -76,7 +76,7 @@ function UpdatePassword() {
   };
 
   return (
-    <div className=" text-center p-8">
+    <div className="bg-gray-100 text-center p-8">
       <button className="" onClick={() => navigation.goBack()}>Back</button>
    
 
@@ -100,7 +100,7 @@ function UpdatePassword() {
         </div>
       </div>
 
-      <div className="mb-8 w-full">
+      <div className="mb-8 w-full ">
         <div className="relative">
           <input
             type={showPassword2 ? 'text' : 'password'}

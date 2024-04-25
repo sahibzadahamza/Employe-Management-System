@@ -32,7 +32,7 @@ const navigate = useNavigate();
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center px-20">
+    <div className="min-h-screen flex flex-col justify-center items-center px-20 bg-gray-100">
       <button className="pr-[12.5rem] my-6 underline text-slate-600" onClick={() => window.history.back()}>Back</button>
 
       <div className="mb-8">
