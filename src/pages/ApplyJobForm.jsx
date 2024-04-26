@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import {  useParams } from 'react-router-dom';
+import React, { useState } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
 const ApplyJobForm = () => {
-    const {id} = useParams();
-    console.log('Job ID:', id); 
-    const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
+  const { id } = useParams();
+  console.log("Job ID:", id);
+  const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
+    name: "",
+    email: "",
     resume: null,
   });
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
 
   const handleInputChange = (e) => {
     setFormData({
@@ -31,28 +31,30 @@ const ApplyJobForm = () => {
     e.preventDefault();
 
     const formDataToSend = new FormData();
-    formDataToSend.append('name', formData.name);
-    formDataToSend.append('email', formData.email);
-    formDataToSend.append('resume', formData.resume);
+    formDataToSend.append("name", formData.name);
+    formDataToSend.append("email", formData.email);
+    formDataToSend.append("resume", formData.resume);
 
     const { name, email, resume } = formData;
 
     try {
-      const response = await axios.post(`${apiUrl}/apply/${id}`, 
-      {
-        name,
-        email,
-        resume
-      }, 
-      {
-        headers: {
-          'Content-Type': 'multipart/form-data',
+      const response = await axios.post(
+        `${apiUrl}/api/apply/${id}`,
+        {
+          name,
+          email,
+          resume,
         },
-      });
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
 
       setMessage(response.data.message);
     } catch (error) {
-      setMessage('Error submitting application. Please try again later.');
+      setMessage("Error submitting application. Please try again later.");
       console.error(error);
     }
   };
