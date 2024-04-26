@@ -4,6 +4,7 @@ import axios from 'axios'; // Import Axios
 import AdminHeader from './AdminHeader';
 
 const UpdateJob = () => {
+  const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
   let { id } = useParams();
   const [job, setJob] = useState(null);
 
@@ -11,7 +12,7 @@ const UpdateJob = () => {
     const fetchJob = async () => {
       const token = localStorage.getItem('token');
       try {
-        const response = await axios.get(`http://localhost:4000/api/jobs/${id}`);
+        const response = await axios.get(`${apiUrl}/api/jobs/${id}`);
         setJob(response.data);
       } catch (error) {
         console.error('Error fetching job:', error);

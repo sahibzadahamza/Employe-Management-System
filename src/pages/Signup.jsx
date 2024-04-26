@@ -3,6 +3,7 @@ import { Link, Navigate } from 'react-router-dom';
 import axios from 'axios'; // Import Axios
 
 const SignUp = () => {
+  const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
   const [redirectToLogin, setRedirectToLogin] = useState(false);
   const [formData, setFormData] = useState({
     firstName: '',
@@ -28,7 +29,7 @@ const SignUp = () => {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      const response = await axios.post('http://localhost:4000/api/signup', {
+      const response = await axios.post(`${apiUrl}/api/signup`, {
         firstname: formData.firstName,
         lastname: formData.lastName,
         email: formData.email,

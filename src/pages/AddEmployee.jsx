@@ -4,6 +4,7 @@ import axios from 'axios'; // Import Axios
 import AdminHeader from './AdminHeader';
 
 const AddEmployee = () => {
+  const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
   const [redirectToEmployeeDetail, setRedirectTomEployeeDetail] = useState(false);
   const [formData, setFormData] = useState({
     firstName: '',
@@ -30,7 +31,7 @@ const AddEmployee = () => {
     setIsSubmitting(true);
     const token = localStorage.getItem('token');
     try {
-      const response = await axios.post('http://localhost:4000/api/employee', {
+      const response = await axios.post(`${apiUrl}/api/employee`, {
         firstname: formData.firstName,
         lastname: formData.lastName,
         email: formData.email,

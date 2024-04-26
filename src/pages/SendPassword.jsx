@@ -3,12 +3,13 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const SendPassword = ()=> {
+  const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
   const [email, setEmail] = useState('');
 const navigate = useNavigate();
   const handlePasswordReset = async () => {
     try {
       const response = await axios.post(
-        'http://localhost:4000/api/sendOtp',
+        `${apiUrl}/api/sendOtp`,
         JSON.stringify({
           email,
         }),

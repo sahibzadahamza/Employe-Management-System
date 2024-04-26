@@ -4,6 +4,7 @@ import axios from 'axios'; // Import Axios
 import AdminHeader from './AdminHeader';
 
 const CreateJob = () => {
+  const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
     const [redirectToJobListing, setRedirectToJobListing] = useState(false);
     const [formData, setFormData] = useState({
         title: '',
@@ -28,7 +29,7 @@ const CreateJob = () => {
         setIsSubmitting(true);
         const token = localStorage.getItem('token');
         try {
-            const response = await axios.post('http://localhost:4000/api/addJobs', {
+            const response = await axios.post(`${apiUrl}/api/addJobs`, {
                 title: formData.title,
                 description:formData.description,
                 requirements: formData.requirements,

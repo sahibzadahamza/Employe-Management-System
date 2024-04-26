@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 function UpdatePassword() {
+  const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
   const [newPassword, setNewPassword] = useState('');
   const [emailID, setEmailID] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -39,7 +40,7 @@ function UpdatePassword() {
       setLoading(true);
 
       const response = await axios.post(
-        'http://localhost:4000/api/resetPassword',
+        `${apiUrl}/api/resetPassword`,
         {
           email: emailID,
           newPassword: confirmPassword,

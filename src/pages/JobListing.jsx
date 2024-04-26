@@ -4,6 +4,7 @@ import axios from 'axios';
 import AdminHeader from './AdminHeader';
 
 const JobListing = () => {
+  const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
   const [jobs, setJobs] = useState([]);
   const [redirectToUpdateJob, setRedirectToUpdateJob] = useState(false);
 
@@ -11,7 +12,7 @@ const JobListing = () => {
     const fetchJobs = async () => {
       const token = localStorage.getItem('token');
       try {
-        const response = await axios.get('http://localhost:4000/api/jobs', {
+        const response = await axios.get(`${apiUrl}/api/jobs`, {
           headers: {
             Authorization: `Bearer ${token}`
           }

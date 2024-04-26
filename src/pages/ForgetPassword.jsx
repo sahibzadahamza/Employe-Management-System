@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 function ForgetPassword() {
+  const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
   const navigation = useNavigate();
   const [code, setCode] = useState('');
   const [loading, setLoading] = useState(false);
@@ -26,7 +27,7 @@ function ForgetPassword() {
       }
       setLoading(true);
       const response = await axios.post(
-        'http://localhost:4000/api/confirmOtp',
+        `${apiUrl}/api/confirmOtp`,
         {
           email: emailID,
           otp: code,

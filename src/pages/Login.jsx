@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
 const Login = () => {
+  const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -13,7 +14,7 @@ const Login = () => {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      const response = await axios.post(`http://localhost:4000/api/login`, {
+      const response = await axios.post(`${apiUrl}/api/login`, {
         email,
         password
       });

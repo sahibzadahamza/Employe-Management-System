@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import NavBar from '../components/NavBar';
 import Login from '../pages/Login';
 import SignUp from '../pages/Signup';
 import EmployeeGrid from '../pages/EmployeesGrid';
@@ -13,6 +12,7 @@ import ForgetPassword from '../pages/ForgetPassword';
 import SendPassword from '../pages/SendPassword';
 import UpdatePassword from '../pages/UpdatePassword';
 import UserEntry from '../pages/UserEntry';
+import ApplyJobForm from '../pages/ApplyJobForm';
 // import UserEntry from '../pages/UserEntry';
 
 const Routers = () => {
@@ -61,6 +61,7 @@ const Routers = () => {
         {isLoggedIn && userRole !== 'employer' && (
           <Routes>
             <Route path="/user" element={<UserEntry />} />
+            <Route path="/apply/:id" element={<ApplyJobForm />} />
             <Route path="*" element={<Navigate to="/user" />} />
           </Routes>
         )}

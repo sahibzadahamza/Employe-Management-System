@@ -4,6 +4,7 @@ import axios from 'axios';
 import AdminHeader from './AdminHeader';
 
 const EmployeeGrid = () => {
+  const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
   const [employees, setEmployees] = useState([]);
   const [redirectToUpdateEmployee, setRedirectToUpdateEmployee] = useState(false);
 
@@ -11,7 +12,7 @@ const EmployeeGrid = () => {
     const fetchEmployees = async () => {
       const token = localStorage.getItem('token');
       try {
-        const response = await axios.get('http://localhost:4000/api/employees', {
+        const response = await axios.get(`${apiUrl}/api/employees`, {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -45,7 +46,7 @@ const EmployeeGrid = () => {
           console.error('No token found!');
           return;
         }
-        const response = await axios.delete(`http://localhost:4000/api/employees/${id}`, {
+        const response = await axios.delete(`{http://localhost:4000}/api/employees/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`
           }

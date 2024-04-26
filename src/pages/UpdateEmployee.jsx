@@ -4,6 +4,7 @@ import axios from 'axios'; // Import Axios
 import AdminHeader from './AdminHeader';
 
 const UpdateEmployee = () => {
+  const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
   let { id } = useParams();
   const [employee, setEmployee] = useState(null);
 
@@ -11,7 +12,7 @@ const UpdateEmployee = () => {
     const fetchEmployee = async () => {
       const token = localStorage.getItem('token');
       try {
-        const response = await axios.get(`http://localhost:4000/api/employees/${id}`, {
+        const response = await axios.get(`${apiUrl}/api/employees/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -65,7 +66,7 @@ const UpdateEmployee = () => {
     setIsSubmitting(true);
     const token = localStorage.getItem('token');
     try {
-      const response = await axios.put(`http://localhost:4000/api/employees/${id}`, {
+      const response = await axios.put(`${apiUrl}/api/employees/${id}`, {
         firstname: formData.firstName,
         lastname: formData.lastName,
         email: formData.email,
