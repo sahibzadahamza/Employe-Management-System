@@ -1,53 +1,58 @@
-import React, { useState } from 'react';
-import { Link, Navigate } from 'react-router-dom';
-import axios from 'axios'; // Import Axios
+import React, { useState } from "react";
+import { Link, Navigate } from "react-router-dom";
+import axios from "axios"; // Import Axios
 
 const AddEmployee = () => {
-  const [redirectToEmployeeDetail, setRedirectTomEployeeDetail] = useState(false);
+  const [redirectToEmployeeDetail, setRedirectTomEployeeDetail] =
+    useState(false);
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    job: '',
-    dateOfJoining: '',
-    image: ''
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    job: "",
+    dateOfJoining: "",
+    image: "",
   });
-  const [isSubmitting, setIsSubmitting] = useState(false); 
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: value
+      [name]: value,
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     try {
-      const response = await axios.post('http://localhost:4000/api/employee', {
-        firstname: formData.firstName,
-        lastname: formData.lastName,
-        email: formData.email,
-        phone: formData.phone,
-        job: formData.job,
-        dateOfJoining: formData.dateOfJoining,
-        image: formData.image
-      }, {
-        headers: {
-          Authorization: `Bearer ${token}`
+      const response = await axios.post(
+        "http://localhost:4000/api/employee",
+        {
+          firstname: formData.firstName,
+          lastname: formData.lastName,
+          email: formData.email,
+          phone: formData.phone,
+          job: formData.job,
+          dateOfJoining: formData.dateOfJoining,
+          image: formData.image,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
-      });// Adjust the URL as per your backend endpoint
-      console.log(response.data); // Handle success response
-      setRedirectTomEployeeDetail(true); // Redirect to login page after successful signup
+      );
+      console.log(response.data);
+      setRedirectTomEployeeDetail(true);
     } catch (error) {
-      setError(error.response.data.message); // Handle error response
-    }finally {
-      setIsSubmitting(false); // Set submitting status back to false
+      setError(error.response.data.message);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -183,19 +188,20 @@ const AddEmployee = () => {
           {error && <p className="text-red-500 text-sm">{error}</p>}
           <div>
             <button
-            disabled={isSubmitting}
+              disabled={isSubmitting}
               type="submit"
               className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
               Add New
             </button>
             <p>
-            Do you want to return Eployees Detail page? please click on...  <Link
-              to="/employeesDetail"
-              className="font-medium text-indigo-600 hover:text-indigo-500"
-            >
-               Back to Employees Details
-            </Link>
+              Do you want to return Eployees Detail page? please click on...{" "}
+              <Link
+                to="/employeesDetail"
+                className="font-medium text-indigo-600 hover:text-indigo-500"
+              >
+                Back to Employees Details
+              </Link>
             </p>
           </div>
         </form>
