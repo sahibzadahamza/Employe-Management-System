@@ -1,5 +1,3 @@
-// routes/index.js
-
 import { Router } from "express";
 import { getEmployees } from "./employee/getEmployees.js";
 import { createEmployee } from "./employee/createEmployee.js";
@@ -13,17 +11,17 @@ import { Job } from "./jobs/Job.js";
 import { deleteJob } from "./jobs/deleteJob.js";
 import { updateJob } from "./jobs/updateJob.js";
 import { showJob } from "./jobs/showJob.js";
+import { ApplyJob } from "./jobs/ApplyJobs.js";
 import auth from "../middlewares/auth.js";
 import { ConfirmPassword } from "./loginSignup/ConfirmPassword.js";
 import { sendPassword } from "./loginSignup/sendPasswrord.js";
 import { updatePassword } from "./loginSignup/updatePassword.js";
 
-
 const router = Router();
 
 // Employee routes
-router.get("/employees",auth, getEmployees);
-router.post("/employee",  createEmployee);
+router.get("/employees", auth, getEmployees);
+router.post("/employee", createEmployee);
 router.delete("/employees/:id", auth, deleteEmployee);
 router.get("/employees/:id", auth, getEmployeeById);
 router.get("/employees/search", auth, searchEmployee);
@@ -39,10 +37,11 @@ router.delete("/jobs/:id", auth, deleteJob);
 router.put("/jobs/:id", auth, updateJob);
 router.get("/jobs", showJob);
 router.get("/jobs/:id", showJob);
-router.post('/confirmOtp', ConfirmPassword);
+router.post("/apply/:id", ApplyJob);
+router.post("/confirmOtp", ConfirmPassword);
 
 // Route for updating user password
-router.post('/resetPassword', updatePassword );
-router.post('/sendOtp', sendPassword);
+router.post("/resetPassword", updatePassword);
+router.post("/sendOtp", sendPassword);
 
 export default router;

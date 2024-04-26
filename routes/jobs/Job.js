@@ -16,7 +16,7 @@ router.post("/addJobs", auth, async (req, res) => {
     }
 
     const { title, description, requirements, salary, jobType } = req.body;
-    
+
     // Create a new job
     const job = new Job({
       title,
