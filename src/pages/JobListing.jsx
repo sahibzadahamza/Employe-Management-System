@@ -51,7 +51,7 @@ const JobListing = () => {
         console.error('No token found!');
         return;
       }
-      const response = await axios.delete(`http://localhost:4000/api/jobs/${id}`, {
+      const response = await axios.delete(`${apiUrl}/api/jobs/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }

@@ -35,6 +35,8 @@ const Routers = () => {
     getUserStatusAndRole();
   }, []);
 
+  
+
   return (
     <>
       <Router>
@@ -58,7 +60,7 @@ const Routers = () => {
             <Route path="/updateEmployee/:id" element={<UpdateEmployee />} />
             <Route path="/showapply" element={<RetrievedJobs/>} />
             
-            <Route path="*" element={<Navigate to="/employee" />} />
+            <Route path="*" element={<Navigate to="/employee" />} />  
           </Routes>
         )}
         {isLoggedIn && userRole !== 'employer' && (

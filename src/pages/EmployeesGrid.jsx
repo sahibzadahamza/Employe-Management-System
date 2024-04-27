@@ -51,7 +51,7 @@ const EmployeeGrid = () => {
           console.error('No token found!');
           return;
         }
-        const response = await axios.delete(`{http://localhost:4000}/api/employees/${id}`, {
+        const response = await axios.delete(`${apiUrl}/api/employees/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`
           }

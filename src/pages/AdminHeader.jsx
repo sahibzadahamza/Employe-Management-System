@@ -15,8 +15,10 @@ const AdminHeader = () => {
     <Link to="/employeesDetail" className="font-medium text-indigo-600 hover:text-indigo-500">View All Employees </Link> 
     <Link to="/createJob" className="font-medium text-indigo-600 hover:text-indigo-500">Post New Job </Link> 
     <Link to="/addEmployee" className="font-medium text-indigo-600 hover:text-indigo-500">Add New Employee </Link> 
-    <Link to="/showapply" className="font-medium text-indigo-600 hover:text-indigo-500">see user apply </Link>
+    <Link to="/showapply" className="font-medium text-indigo-600 hover:text-indigo-500">View Applications </Link>
+    <div className='ml-40'>
     <button onClick={logout}>Logout</button>    
+    </div>
     </div>
   )
 }
