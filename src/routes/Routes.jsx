@@ -13,6 +13,7 @@ import SendPassword from '../pages/SendPassword';
 import UpdatePassword from '../pages/UpdatePassword';
 import UserEntry from '../pages/UserEntry';
 import ApplyJobForm from '../pages/ApplyJobForm';
+import RetrievedJobs from '../pages/retrievedJobs';
 // import UserEntry from '../pages/UserEntry';
 
 const Routers = () => {
@@ -55,6 +56,8 @@ const Routers = () => {
             <Route path="/updateJob/:id" element={<UpdateJob />} />
             <Route path="/addEmployee" element={<AddEmployee />} />
             <Route path="/updateEmployee/:id" element={<UpdateEmployee />} />
+            <Route path="/showapply" element={<RetrievedJobs/>} />
+            
             <Route path="*" element={<Navigate to="/employee" />} />
           </Routes>
         )}

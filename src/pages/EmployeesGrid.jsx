@@ -6,6 +6,7 @@ import AdminHeader from './AdminHeader';
 const EmployeeGrid = () => {
   const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
   const [employees, setEmployees] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
   const [redirectToUpdateEmployee, setRedirectToUpdateEmployee] = useState(false);
 
   useEffect(() => {
@@ -25,6 +26,10 @@ const EmployeeGrid = () => {
 
     fetchEmployees();
   }, []); // Run once on component mount
+
+  const filteredemployee = employees.filter(employees =>
+    employees.job.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   const handleUpdate = (id) => {
 
@@ -62,9 +67,18 @@ const EmployeeGrid = () => {
     <>
 <AdminHeader/>
     <div className='px-20 py-10 bg-gray-100'>
-        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900 mb-6" >Employee Details</h2> 
+        <div className='flex justify-between gap-96 mb-6'>
+        <h2 className="text-3xl font-extrabold text-gray-900">Employees Details</h2>
+          <input
+            type='text'
+            placeholder='Search by job title'
+            value={searchQuery}
+            onChange={e => setSearchQuery(e.target.value)}
+            className='flex-grow ml-4 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500'
+          />
+        </div>
         <div className="grid grid-cols-3 gap-4">
-          {employees.map(employee => (
+          {filteredemployee.map(employee => (
             <div key={employee._id} className="bg-white overflow-hidden shadow rounded-lg p-4">
               <img className="h-48 w-full object-cover" src={employee.image} alt={`${employee.firstname} ${employee.lastname}`} />
               <div className="px-4 py-4">

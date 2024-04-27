@@ -1,7 +1,4 @@
 import React from 'react'
-import {Link} from 'react-router-dom';
-
-
 
 const UserHeader = () => {
    
@@ -10,7 +7,7 @@ const UserHeader = () => {
         window.location.reload();
     }
   return (
-    <div className='flex gap-6 justify-center py-10 items-center'>
+    <div className='flex gap-6 justify-end items-end py-10 px-20 '>
 
     <button onClick={logout}>Logout</button>    
     </div>
