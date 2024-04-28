@@ -14,10 +14,11 @@ const UserHeader = () => {
 
         <img className='w-[150px] h-[150px]' src={img} alt="image" />
       </div>
-      <div className='mt-20'>
+      <div className='mt-20 space-x-6'>
       <Link to="/user-apply" className="font-medium text-indigo-600 hover:text-indigo-500 ">View Applications </Link>
+      <Link to="/user" className="font-medium text-indigo-600 hover:text-indigo-500 ">View Jobs </Link>
       </div>
-      <div className='mt-20'>
+      <div className='mt-16'>
         <button onClick={logout} className='group relative  py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>Logout</button>
       </div>
     </div>

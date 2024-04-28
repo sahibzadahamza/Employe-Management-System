@@ -16,25 +16,28 @@ const ShowAppliedJobs = () => {
 
   return (
     <>
+    
       <UserHeader />
-      <div className="flex">
-        <input type="text" onChange={(e) => setEmail(e.target.value)} />
+      <div className="bg-gray-100 min-h-screen p-20">
+      <div className="flex justify-center gap-5 items-center">
+        <input type="text" placeholder="enter you email" onChange={(e) => setEmail(e.target.value)} />
         <button onClick={fetchAppliedJobs}>Get Applied Jobs</button>
       </div>
-      <div>
+      <div className="mt-10">
         <h2 className="text-center text-lg">Jobs Applied By You</h2>
         {appliedJobs.length === 0 ? (
           <p className="text-center mt-20">No jobs applied yet.</p>
         ) : (
-          <ul>
+          <ul className="text center">
             {appliedJobs.map((job) => (
               <li key={job._id}>
-                <h3>{job.jobTitle}</h3>
-                <p>Job ID: {job.jobId}</p>
+                <h3 className="flex justify-center items-center">Job Title: {job.jobTitle}</h3>
+                <p className="flex justify-center items-center">Job ID: {job.jobId}</p>
               </li>
             ))}
           </ul>
         )}
+      </div>
       </div>
     </>
   );
