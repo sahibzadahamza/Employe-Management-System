@@ -9,6 +9,8 @@ const ShowAppliedJobs = () => {
   const fetchAppliedJobs = async () => {
     const response = await axios.get(`${apiUrl}/api/user-apply?email=${email}`);
     setAppliedJobs(response.data.jobApplications);
+    console.log(response.data.jobApplications)
+    
   };
   console.log(appliedJobs);
 
