@@ -22,7 +22,8 @@ const Login = () => {
         const token = response.data.token;
         localStorage.setItem('token', token);
       const data =response.data.result.role
-      localStorage.setItem('data',data)     
+      localStorage.setItem('data',data) 
+      localStorage.setItem('isLoggedIn',true)    
       console.log("login")
      if(response.data.result.role === "employer")
      {
@@ -33,7 +34,6 @@ const Login = () => {
      }
         
      window.location.reload();
-
       }
     } catch (error) {
       setError('Invalid email or password');

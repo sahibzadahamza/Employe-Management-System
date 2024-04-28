@@ -15,44 +15,46 @@ import UserEntry from '../pages/UserEntry';
 import ApplyJobForm from '../pages/ApplyJobForm';
 import RetrievedJobs from '../pages/retrievedJobs';
 import ShowAppliedJobs from '../pages/ShowAppliedJobs';
-// import UserEntry from '../pages/UserEntry';
 
 const Routers = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userRole, setUserRole] = useState('');
 
-  const getUserStatusAndRole = () => {
+  useEffect(() => {
+    const loggedIn = localStorage.getItem('isLoggedIn') === 'true';
     const roleFromServer = localStorage.getItem('data')?.toString();
-    if (roleFromServer) {
+
+    if (loggedIn && roleFromServer) {
       setIsLoggedIn(true);
       setUserRole(roleFromServer);
-    } 
-    else {
+    } else {
       setIsLoggedIn(false);
     }
-  };
 
-  useEffect(() => {
-    getUserStatusAndRole();
+    setIsLoading(false); // Mark data loading as complete
   }, []);
 
-  
+  if (isLoading) {
+    return <div>Loading...</div>; // Render a loading indicator until data is loaded
+  }
 
   return (
-    <>
-      <Router>
+    <Router>
+      <Routes>
         {!isLoggedIn && (
-          <Routes>
+          <>
             <Route path='/forgetPassword' element={<ForgetPassword />} />
             <Route path='/updatePassword' element={<UpdatePassword />} />
             <Route path='/sendPassword' element={<SendPassword />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="*" element={<Navigate to="/login" />} />
-          </Routes>
+          </>
         )}
+
         {isLoggedIn && userRole === 'employer' && (
-          <Routes>
+          <>
             <Route path="/employee" element={<EmployeeGrid />} />
             <Route path="/joblisting" element={<JobListing />} />
             <Route path="/createJob" element={<CreateJob />} />
@@ -60,23 +62,21 @@ const Routers = () => {
             <Route path="/addEmployee" element={<AddEmployee />} />
             <Route path="/updateEmployee/:id" element={<UpdateEmployee />} />
             <Route path="/showapply" element={<RetrievedJobs/>} />
-            
             <Route path="*" element={<Navigate to="/employee" />} />  
-          </Routes>
+          </>
         )}
+
         {isLoggedIn && userRole !== 'employer' && (
-          <Routes>
+          <>
             <Route path="/user" element={<UserEntry />} />
             <Route path="/apply/:id" element={<ApplyJobForm />} />
             <Route path="/user-apply" element={<ShowAppliedJobs/>} />
             <Route path="*" element={<Navigate to="/user" />} />
-          </Routes>
+          </>
         )}
-      </Router>
-    </>
+      </Routes>
+    </Router>
   );
 };
 
 export default Routers;
-
-

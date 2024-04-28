@@ -67,8 +67,8 @@ function ForgetPassword() {
       );
 
       if (response.status === 200) {
+        alert('otp send again') 
        localStorage.setItem('email',email)
-       console.alert('otp send again')
         // navigate('/forgetPassword')
         // Handle success
       } else {
@@ -84,7 +84,7 @@ function ForgetPassword() {
 
   return (
 
-    <div className="p-20 space-y-6 text-center bg-gray-100">
+    <div className="p-20 space-y-6 text-center bg-gray-100 min-h-screen">
       <button className="underline" onClick={() => window.history.back()}>Back</button>
       <h1 className="text-3xl font-bold">Forgot Password</h1>
       <p>Password recovery email sent to {hiddenPart}</p>

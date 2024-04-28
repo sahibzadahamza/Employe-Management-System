@@ -9,10 +9,11 @@ const SignUp = () => {
     firstName: '',
     lastName: '',
     email: '',
-    role: 'employer',
+    role: 'employee',
     cnic: '',
     phone: '',
-    password: ''
+    password: '',
+    confirmPassword: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false); 
   const [error, setError] = useState(null);
@@ -28,6 +29,30 @@ const SignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+
+    const cnicRegex = /^[0-9]{5}-[0-9]{7}-[0-9]{1}$/;
+    const phoneRegex = /^\+\d{12}$/;
+
+    // Validate CNIC format
+    if (!cnicRegex.test(formData.cnic)) {
+      setError('CNIC should be in the format xxxxx-xxxxxxx-x');
+      setIsSubmitting(false);
+      return;
+    }
+
+    // Validate phone number format
+    if (!phoneRegex.test(formData.phone)) {
+      setError('Phone number should be in the format +923xxxxxxxxx');
+      setIsSubmitting(false);
+      return;
+    }
+
+    if (formData.password !== formData.confirmPassword) {
+      setError('Passwords do not match');
+      setIsSubmitting(false);
+      return;
+    }
+
     try {
       const response = await axios.post(`${apiUrl}/api/signup`, {
         firstname: formData.firstName,
@@ -37,6 +62,7 @@ const SignUp = () => {
         role: formData.role,
         phone: formData.phone,
         password: formData.password
+
       });// Adjust the URL as per your backend endpoint
       console.log(response); // Handle success response
       setRedirectToLogin(true); // Redirect to login page after successful signup
@@ -142,14 +168,14 @@ const SignUp = () => {
                 placeholder="Phone"
               />
             </div>
-            <div>
+            {/* <div>
                 <label htmlFor="role">Role:</label>
                 <select id="role" name="role" value={formData.role} onChange={handleChange} required
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"> 
                 <option name="employee" value='employee'>employee</option>
                 <option name="employer" value='employer'>employer</option>
                 </select>
-            </div>
+            </div> */}
             <div>
               <label htmlFor="password" className="">
                 Password
@@ -164,6 +190,22 @@ const SignUp = () => {
                 onChange={handleChange}
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Password"
+              />
+            </div>
+            <div>
+              <label htmlFor="confirmPassword" className="">
+                Confirm Password
+              </label>
+              <input
+                id="confirmPassword"
+                name="confirmPassword"
+                type="password"
+                autoComplete="new-password"
+                required
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                placeholder="Confirm Password"
               />
             </div>
           </div>

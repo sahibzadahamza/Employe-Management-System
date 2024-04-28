@@ -8,6 +8,7 @@ const AdminHeader = () => {
    
     const logout=()=>{
         localStorage.removeItem('data')
+        localStorage.setItem('isLoggedIn',false) 
         window.location.reload();
     }
   return (

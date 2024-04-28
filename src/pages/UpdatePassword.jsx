@@ -53,6 +53,7 @@ function UpdatePassword() {
       );
 
       if (response.status === 200) {
+        alert('Successfully updated')
         console.log('Success', response.data.message || 'Successfully updated');
         navigate('/login');
       } else {
