@@ -11,7 +11,7 @@ function ForgetPassword() {
 
   useEffect(() => {
     const fetchEmail = async () => {
-      const email = await localStorage.getItem('email');
+      const email = localStorage.getItem('email');
       setEmailID(email);
     };
 
@@ -38,10 +38,7 @@ function ForgetPassword() {
           },
         },
       );
-
       if (response.status === 200) {
-
-        // navigation.navigate('confirmpass');
         navigation('/updatePassword')
       } else {
         const errorMessage = response.data.message || 'Something went wrong.';
@@ -54,40 +51,36 @@ function ForgetPassword() {
     }
   };
 
-  // const handlePasswordReset = async () => {
-  //   try {
-  //     setLoading(true);
-  //     const response = await axios.post(
-  //       '/api/v1/auth/sendOtp',
-  //       JSON.stringify({
-  //         email: emailID,
-  //       }),
-  //       {
-  //         headers: {
-  //           'Content-Type': 'application/json',
-  //         },
-  //       },
-  //     );
+  const handlePasswordReset = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.post(
+        `${apiUrl}/api/sendOtp`,
+        JSON.stringify({
+          email:emailID,
+        }),
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
 
-  //     if (response?.status === 200) {
-  //       const responseData = response.data;
-  //       console.log(response);
-  //       console.log('Success', responseData.message || 'OTP sent to your email');
-  //     } else {
-  //       const errorMessage = response.data.message || 'Something went wrong.';
-  //       console.log('Error', errorMessage);
-  //     }
-  //   } catch (error) {
-  //     const errorMessage = error.response
-  //       ? error.response.data.message
-  //       : 'Something went wrong.';
-  //       console.log('Error', errorMessage);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
+      if (response.status === 200) {
+       localStorage.setItem('email',email)
+       console.alert('otp send again')
+        // navigate('/forgetPassword')
+        // Handle success
+      } else {
+        // Handle error
+      }
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      // Handle error
+    }
+  };
 
-  const handleContactSupport = () => { };
 
   return (
 
@@ -102,11 +95,10 @@ function ForgetPassword() {
         onChange={(e) => setCode(e.target.value)}
         className=""
       />
-      <p>Didn't receive email? <button disabled={loading} className="underline text-purple-300">Resend</button></p>
+      <p>Didn't receive email? <button disabled={loading} onClick={handlePasswordReset} className="underline text-purple-300">Resend</button></p>
       <button className="group relative py-2 px-20 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" onClick={handleSubmit} disabled={loading}>
         Submit
       </button>
-      <p>Still not working? <button onClick={handleContactSupport} className="underline text-purple-300">Contact Support</button></p>
     </div>
   );
 }

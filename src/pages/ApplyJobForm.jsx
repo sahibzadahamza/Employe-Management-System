@@ -6,6 +6,7 @@ const ApplyJobForm = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
+
   const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
   const [formData, setFormData] = useState({
     name: "",
@@ -35,7 +36,6 @@ const ApplyJobForm = () => {
     formDataToSend.append("name", formData.name);
     formDataToSend.append("email", formData.email);
     formDataToSend.append("resume", formData.resume);
-
     const { name, email, resume } = formData;
 
     try {

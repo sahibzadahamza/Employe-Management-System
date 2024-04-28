@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import UserHeader from './userHeader';
 
 const ShowAppliedJobs = () => {
     const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
@@ -8,12 +9,9 @@ const ShowAppliedJobs = () => {
   useEffect(() => {
     const fetchAppliedJobs = async () => {
       try {
-        const token = localStorage.getItem('token');
-        const response = await axios.get(`${apiUrl}/api/user-apply`, {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        });
+        const response = await axios.get(`${apiUrl}/api/user-apply`
+     
+    );
         setAppliedJobs(response.data.jobApplications);
       } catch (error) {
         console.error('Error fetching applied jobs:', error);
@@ -24,6 +22,9 @@ const ShowAppliedJobs = () => {
   }, []);
 
   return (
+    <>  
+        
+      <UserHeader/>
     <div>
       <h2>Jobs Applied By You</h2>
       {appliedJobs.length === 0 ? (
@@ -40,6 +41,8 @@ const ShowAppliedJobs = () => {
         </ul>
       )}
     </div>
+    </>
+
   );
 };
 

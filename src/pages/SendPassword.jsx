@@ -5,9 +5,11 @@ import { useNavigate } from 'react-router-dom';
 const SendPassword = ()=> {
   const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
   const [email, setEmail] = useState('');
+  const [loading, setLoading] = useState(false);
 const navigate = useNavigate();
   const handlePasswordReset = async () => {
     try {
+      setLoading(true);
       const response = await axios.post(
         `${apiUrl}/api/sendOtp`,
         JSON.stringify({
@@ -27,7 +29,9 @@ const navigate = useNavigate();
       } else {
         // Handle error
       }
+      setLoading(false);
     } catch (error) {
+      setLoading(false);
       // Handle error
     }
   };
@@ -52,6 +56,7 @@ const navigate = useNavigate();
       </div>
 
       <button className="group relative flex justify-center py-2 px-20 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+      disabled={loading}
        onClick={handlePasswordReset}>
         Submit
       </button>
