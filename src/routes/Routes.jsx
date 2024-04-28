@@ -14,6 +14,7 @@ import UpdatePassword from '../pages/UpdatePassword';
 import UserEntry from '../pages/UserEntry';
 import ApplyJobForm from '../pages/ApplyJobForm';
 import RetrievedJobs from '../pages/retrievedJobs';
+import ShowAppliedJobs from '../pages/ShowAppliedJobs';
 // import UserEntry from '../pages/UserEntry';
 
 const Routers = () => {
@@ -67,6 +68,7 @@ const Routers = () => {
           <Routes>
             <Route path="/user" element={<UserEntry />} />
             <Route path="/apply/:id" element={<ApplyJobForm />} />
+            <Route path="/user-apply" element={<ShowAppliedJobs/>} />
             <Route path="*" element={<Navigate to="/user" />} />
           </Routes>
         )}

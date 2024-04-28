@@ -31,7 +31,6 @@ const UserEntry = () => {
   );
   return (
     <>
-
       <UserHeader />
       <div className='px-20 py-10 bg-gray-100'>
         <div className='flex justify-between gap-96 mb-6'>
